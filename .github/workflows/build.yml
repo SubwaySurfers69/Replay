@@ -1,25 +1,30 @@
 name: Build iOS App
-
 on: [push]
-
 jobs:
   build:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install xcogen
+      - name: Install xcodegen
         run: brew install xcodegen
 
       - name: Generate Project
         run: xcodegen generate
 
-      - name: Build App
+      - name: Archive and Export App
         run: |
-          xcodebuild build \
+          # 1. Archive the project
+          xcodebuild archive \
           -project Replay.xcodeproj \
           -scheme Replay \
-          -destination 'generic/platform=iOS' \
+          -archivePath Replay.xcarchive \
           CODE_SIGN_IDENTITY="" \
           CODE_SIGNING_REQUIRED=NO \
           CODE_SIGNING_ALLOWED=NO
+
+          # 2. Export the archive into an IPA
+          xcodebuild -exportArchive \
+          -archivePath Replay.xcarchive \
+          -exportPath . \
+          -exportOptionsPlist exportOptions.plist
