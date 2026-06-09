@@ -1,0 +1,23 @@
+name: Build iOS App
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install xcogen
+        run: brew install xcodegen
+
+      - name: Generate Project
+        run: xcodegen generate
+
+      - name: Build App
+        run: |
+          xcodebuild build \
+          -project Replay.xcodeproj \
+          -scheme Replay \
+          -destination 'generic/platform=iOS' \
+          -derivedDataPath Build/
