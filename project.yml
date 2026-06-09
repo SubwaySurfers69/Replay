@@ -1,1 +1,14 @@
-
+name: Replay
+options:
+  bundleIdPrefix: com.subway
+targets:
+  Replay:
+    type: application
+    platform: iOS
+    deploymentTarget: "15.0"
+    sources:
+      - path: Sources
+    settings:
+      INFOPLIST_FILE: Sources/Info.plist
+      MARKETING_VERSION: "1.0.0"
+      CURRENT_PROJECT_VERSION: "1"
