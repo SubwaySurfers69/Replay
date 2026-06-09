@@ -1,6 +1,6 @@
 name: Replay
 options:
-  bundleIdPrefix: com.subway
+  bundleIdPrefix: "thewonderofyou.Feather"
 targets:
   Replay:
     type: application
@@ -9,6 +9,7 @@ targets:
     sources:
       - path: Sources
     settings:
+      PRODUCT_BUNDLE_IDENTIFIER: "thewonderofyou.Feather.VR242P5QF6"
       INFOPLIST_FILE: Sources/Info.plist
       MARKETING_VERSION: "1.0.0"
       CURRENT_PROJECT_VERSION: "1"
