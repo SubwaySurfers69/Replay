@@ -1,17 +1,29 @@
 import UIKit
+import ReplayKit
 
 class ViewController: UIViewController {
+    let recorder = RPScreenRecorder.shared()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        // Add a "Hello World" label
-        let label = UILabel()
-        label.text = "Hello, World!"
-        label.textColor = .black
-        label.frame = CGRect(x: 0, y: 0, width: 200, height: 50)
-        label.center = view.center
-        
-        view.addSubview(label)
+        let button = UIButton(frame: CGRect(x: 100, y: 100, width: 150, height: 50))
+        button.setTitle("Start Recording", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        button.addTarget(self, action: #selector(toggleRecording), for: .touchUpInside)
+        view.addSubview(button)
+    }
+
+    @objc func toggleRecording() {
+        if recorder.isRecording {
+            recorder.stopRecording { (preview, error) in
+                // Handle the finished video
+            }
+        } else {
+            recorder.startRecording { error in
+                if let error = error { print("Error: \(error)") }
+            }
+        }
     }
 }
