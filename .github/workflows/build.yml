@@ -12,9 +12,8 @@ jobs:
       - name: Generate Project
         run: xcodegen generate
 
-      - name: Archive and Export App
+      - name: Archive App
         run: |
-          # 1. Archive the project
           xcodebuild archive \
           -project Replay.xcodeproj \
           -scheme Replay \
@@ -23,8 +22,14 @@ jobs:
           CODE_SIGNING_REQUIRED=NO \
           CODE_SIGNING_ALLOWED=NO
 
-          # 2. Export the archive into an IPA
-          xcodebuild -exportArchive \
-          -archivePath Replay.xcarchive \
-          -exportPath . \
-          -exportOptionsPlist exportOptions.plist
+      - name: Package IPA Manually
+        run: |
+          mkdir Payload
+          cp -r Replay.xcarchive/Products/Applications/Replay.app Payload/
+          zip -r Replay.ipa Payload
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: Replay-App
+          path: Replay.ipa
