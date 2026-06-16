@@ -8,6 +8,8 @@ targets:
     deploymentTarget: "15.0"
     sources:
       - path: Sources
+    dependencies:
+      - target: ReplayExtension
     settings:
       PRODUCT_BUNDLE_IDENTIFIER: "com.subway.replay"
       INFOPLIST_FILE: Sources/Info.plist
