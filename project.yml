@@ -3,14 +3,6 @@ options:
   bundleIdPrefix: com.subway
 targets:
   Replay:
-  ReplayExtension:
-    type: app-extension
-    platform: iOS
-    deploymentTarget: "15.0"
-    sources: [BroadcastExtension]
-    settings:
-      PRODUCT_BUNDLE_IDENTIFIER: "com.subway.replay.ScreenRecordExtension"
-      INFOPLIST_FILE: BroadcastExtension/Info.plist
     type: application
     platform: iOS
     deploymentTarget: "15.0"
@@ -21,3 +13,12 @@ targets:
       INFOPLIST_FILE: Sources/Info.plist
       MARKETING_VERSION: "1.0.0"
       CURRENT_PROJECT_VERSION: "1"
+  ReplayExtension:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "15.0"
+    sources:
+      - path: BroadcastExtension
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: "com.subway.replay.ScreenRecordExtension"
+      INFOPLIST_FILE: BroadcastExtension/Info.plist
